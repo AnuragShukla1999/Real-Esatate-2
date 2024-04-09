@@ -4,6 +4,9 @@ import { useAuth0 } from "@auth0/auth0-react";
 import AddLocation from '../AddLocation/AddLocation';
 import UploadImage from '../UploadImage/UploadImage';
 
+import BasicDetails from "../BasicDetails/BasicDetails";
+import Facilities from "../Facilities/Facilities";
+
 const AddPropertyModal = ({ opened, setOpened }) => {
 
     const [active, setActive] = useState(0);
@@ -33,48 +36,63 @@ const AddPropertyModal = ({ opened, setOpened }) => {
         setActive((current) => (current > 0 ? current - 1 : current));
     };
 
-  return (
-     <Modal
-        opened={opened}
-        onClose={() => setOpened(false)}
-        closeOnClickOutside
-        size={"90rem"}
-     >
-        <Container h={"40rem"} w={"100%"}>
-            <Stepper
-                active={active}
-                onStepClick={setActive}
-                breakpoint="sm"
-                allowNextStepsSelect={false}
-            >
-                <Stepper.Step label="location" description="Address">
-                    <AddLocation
-                        nextStep={nextStep}
-                        propertyDetails={propertyDetails}
-                        setPropertyDetails={setPropertyDetails}
-                    />
-                </Stepper.Step>
+    return (
+        <Modal
+            opened={opened}
+            onClose={() => setOpened(false)}
+            closeOnClickOutside
+            size={"90rem"}
+        >
+            <Container h={"40rem"} w={"100%"}>
+                <Stepper
+                    active={active}
+                    onStepClick={setActive}
+                    breakpoint="sm"
+                    allowNextStepsSelect={false}
+                >
+                    <Stepper.Step label="location" description="Address">
+                        <AddLocation
+                            nextStep={nextStep}
+                            propertyDetails={propertyDetails}
+                            setPropertyDetails={setPropertyDetails}
+                        />
+                    </Stepper.Step>
 
-                <Stepper.Step>
-                    <UploadImage
-                        prevStep={prevStep}
-                        nextStep={nextStep}
-                        propertyDetails={propertyDetails}
-                        setPropertyDetails={setPropertyDetails}
-                    />
-                </Stepper.Step>
+                    <Stepper.Step>
+                        <UploadImage
+                            prevStep={prevStep}
+                            nextStep={nextStep}
+                            propertyDetails={propertyDetails}
+                            setPropertyDetails={setPropertyDetails}
+                        />
+                    </Stepper.Step>
 
-                <Stepper.Step>
-                    <BasicDetails
-                        prevStep={prevStep}
-                        nextStep={nextStep}
-                        
-                    />
-                </Stepper.Step>
-            </Stepper>
-        </Container>
-     </Modal>
-  )
+                    <Stepper.Step>
+                        <BasicDetails
+                            prevStep={prevStep}
+                            nextStep={nextStep}
+                            propertyDetails={propertyDetails}
+                            setPropertyDetails={setPropertyDetails}
+                        />
+                    </Stepper.Step>
+
+                    <Stepper.Step>
+                        <Facilities
+                            prevStep={prevStep}
+                            propertyDetails={propertyDetails}
+                            setPropertyDetails={setPropertyDetails}
+                            setOpened={setOpened}
+                            setActiveStep={setActive}
+                        />
+                    </Stepper.Step>
+
+                    <Stepper.Completed>
+                        Completed, click back button to get to previous step
+                    </Stepper.Completed>
+                </Stepper>
+            </Container>
+        </Modal>
+    )
 }
 
 export default AddPropertyModal

@@ -6,15 +6,12 @@ import PropertyCard from "../../components/PropertyCard/PropertyCard";
 import "../Properties/Properties.css";
 import UserDetailContext from "../../context/UserDetailContext";
 
-const Bookings = () => {
-
+const Favourites = () => {
   const { data, isError, isLoading } = useProperties();
   const [filter, setFilter] = useState("");
-
   const {
-    userDetails: { bookings },
+    userDetails: { favourites },
   } = useContext(UserDetailContext);
-
 
   if (isError) {
     return (
@@ -22,8 +19,7 @@ const Bookings = () => {
         <span>Error while fetching data</span>
       </div>
     );
-  };
-
+  }
 
   if (isLoading) {
     return (
@@ -36,10 +32,8 @@ const Bookings = () => {
           aria-label="puff-loading"
         />
       </div>
-    )
+    );
   }
-
-
   return (
     <div className="wrapper">
       <div className="flexColCenter paddings innerWidth properties-container">
@@ -50,9 +44,7 @@ const Bookings = () => {
             // data.map((card, i)=> (<PropertyCard card={card} key={i}/>))
 
             data
-              .filter((property) =>
-                bookings.map((booking) => booking.id).includes(property.id)
-              )
+              .filter((property) => favourites.includes(property.id))
 
               .filter(
                 (property) =>
@@ -67,7 +59,7 @@ const Bookings = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Bookings
+export default Favourites;

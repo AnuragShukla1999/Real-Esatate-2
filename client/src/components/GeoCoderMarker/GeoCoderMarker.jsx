@@ -6,6 +6,14 @@ import icon from "leaflet/dist/images/marker-icon.png";
 import iconShadow from "leaflet/dist/images/marker-shadow.png";
 import * as ELG from 'esri-leaflet-geocoder'
 
+
+let DefaulIcon = L.icon ({
+    iconUrl : icon, 
+    shadowUrl: iconShadow
+})
+L.Marker.prototype.options.icon = DefaulIcon
+
+
 const GeoCoderMarker = ({ address }) => {
 
     const map = useMap();

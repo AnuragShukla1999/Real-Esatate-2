@@ -15,7 +15,7 @@ const useProperties = () => {
         isError, 
         isLoading, 
         refetch
-    }
-}
+    };
+};
 
-export default useProperties
+export default useProperties;
